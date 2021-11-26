@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>MVC Web application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+<h1>Detail of person:</h1>
+<div>
+    <p>
+        <b>First Name: </b><i th:text="${person.getFirstName()}">John </i><br>
+        <b>Last Name: </b><i th:text="${person.getLastName()}">Smith</i>
+    </p>
+</div>
+
+<a href=""> edit </a><br>
+<a href=""> delete </a><br>
+<a href="list"> Show the list </a>
+
+</body>
+</html>

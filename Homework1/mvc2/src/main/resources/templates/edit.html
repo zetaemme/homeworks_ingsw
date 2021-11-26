@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>MVC Web application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+<h1>Edit a record</h1>
+
+<form action="update?id=10" th:action="@{update(id=${person.getId()})}" method="post">
+    <b>First Name:</b><br>
+    <input type="text" name="firstname" th:value="${person.getFirstName()}"><br>
+    <b>Last Name:</b><br>
+    <input type="text" name="lastname" th:value="${person.getLastName()}"><br>
+    <input type="submit"/>
+</form>
+<br>
+<a href="list"> Show the list </a>
+
+</body>
+</html>

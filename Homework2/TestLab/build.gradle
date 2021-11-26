@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'it.univr'
+version '1.0-SNAPSHOT'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
