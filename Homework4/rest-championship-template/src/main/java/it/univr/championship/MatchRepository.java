@@ -2,6 +2,8 @@ package it.univr.championship;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface MatchRepository extends CrudRepository<Match, Long> {
+import java.util.Optional;
 
+public interface MatchRepository extends CrudRepository<Match, Long> {
+	Iterable<Match> findAllByTeamAOrTeamB(String teamA, String teamB);
 }

@@ -46,7 +46,7 @@ public class Match {
         return teamB;
     }
 
-    public void setTeamBName(String teamB) {
+    public void setTeamB(String teamB) {
         this.teamB = teamB;
     }
 
