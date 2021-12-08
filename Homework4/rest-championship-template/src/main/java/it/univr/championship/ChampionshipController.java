@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @RestController
@@ -57,7 +59,7 @@ public class ChampionshipController {
 	}
 
 	@GetMapping("/ranking")
-	public Map<String, String> getRanking() {
+	public Map<Long, Map<String, Object>> getRanking() {
 		Map<String, Integer> teams = new HashMap<>();
 
 		for (String team : getAllTeams().get("teams")) {
@@ -88,19 +90,27 @@ public class ChampionshipController {
 				)
 		);
 
-		Map<String, String> res = new HashMap<>();
+		/* FIXME Non funziona, sortedTeams ha tutto il ranking nell'ordiene corretto ma non riesco a formattare
+		 *  correttamente il risultato
+		 */
+		Map<Long, Map<String, Object>> res = new HashMap<>();
 
-		// FIXME Da print il risultato è corretto ma quando esegue il test il valore è null
-		int i = 1;
-		for (String teamName : sortedTeams.keySet()) {
-			res.put(i + ".team", teamName);
-			res.put(i + ".points", sortedTeams.get(teamName).toString());
+		Map<String, Object> temp = new HashMap<>();
 
-			// System.out.println(i + ".team: " + teamName);
-			// System.out.println(i + ".points: " + sortedTeams.get(teamName));
+		AtomicLong i = new AtomicLong(1);
+		sortedTeams.forEach((key, value) -> {
+			temp.clear();
+			temp.put("team", key);
 
-			i++;
-		}
+			res.put(i.get(), temp);
+
+			temp.clear();
+			temp.put("points", value);
+
+			res.put(i.get(), temp);
+
+			i.getAndIncrement();
+		});
 
 		return res;
 	}
